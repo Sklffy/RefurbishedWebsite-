@@ -12,6 +12,22 @@ const certifications = [
     credlyUrl: 'https://www.credly.com/badges/37966575-74ce-4c86-abc5-a63757cdcd73/public_url',
     description: 'Industry-standard certification validating core security skills and knowledge.',
   },
+  {
+    title: 'AWS Cloud Quest: Cloud Practitioner',
+    issuer: 'Amazon Web Services',
+    date: 'Aug 2026',
+    badge: 'https://images.credly.com/images/30816e43-2550-4e1c-be22-3f03c5573bb9/blob',
+    credlyUrl: 'https://www.credly.com/badges/7b8a5d1c-3b02-4b27-bd2d-9f84915e14d6/public_url',
+    description: 'Training badge for hands-on solution building with AWS compute, networking, database, and security services.',
+  },
+  {
+    title: 'AWS Knowledge: Cloud Essentials',
+    issuer: 'Amazon Web Services',
+    date: 'May 2026',
+    badge: 'https://images.credly.com/images/7cf036b0-c609-4378-a7be-9969e1dea7ab/blob',
+    credlyUrl: 'https://www.credly.com/badges/11e0f3d0-9c4a-492b-99b1-385c4bbd8030/public_url',
+    description: 'Training badge covering foundational AWS concepts: compute, storage, networking, databases, security, architecture, and pricing.',
+  },
 ];
 
 export default function CertificationsSection({ hidePadding = false }) {
