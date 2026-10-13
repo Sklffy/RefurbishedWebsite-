@@ -33,16 +33,16 @@ const staticExperiences = [
     ],
   },
   {
-    title: 'Cybersecurity Analyst (FBI) | Government Consultant',
+    title: 'Cybersecurity Consultant',
     company: 'Liberty Analytic Support Initiative',
-    date: 'Feb 2026 – May 2026',
-    location: 'Lynchburg, VA',
+    date: 'Jan 2026 – May 2026',
+    location: 'Lynchburg, VA · Contract',
     logo: LIBERTY_LOGO,
     logoBg: 'bg-white',
     points: [
-      'Conducted OSINT collection and analysis on cyber threat actors, TTPs, and infrastructure for federal and international government partners.',
-      'Produced cyber threat intelligence briefings for government stakeholders on national security priorities.',
-      'Performed threat research spanning campaign tracking and vulnerability exploitation analysis.',
+      'Produced intelligence assessments supporting U.S. national security and law enforcement stakeholders.',
+      'Briefed the FBI Richmond Field Office and other federal partners on analytic findings and recommendations.',
+      'Selected through a competitive faculty nomination and interview process for a student-led intelligence analysis program supporting federal agencies.',
     ],
   },
   {
@@ -61,7 +61,7 @@ const staticExperiences = [
   {
     title: 'SSH/FTP Services Specialist',
     company: 'NCAE Cyber Games',
-    date: 'Jan 2025 – May 2025',
+    date: 'Nov 2024 – Mar 2025',
     location: 'Lynchburg, VA',
     logo: 'https://media.base44.com/images/public/69b99a1da1ddf45e7cfb0a87/a7781e3fc_1682451946890.jpg',
     logoBg: 'bg-white',
@@ -131,6 +131,7 @@ export default function ExperienceSection({ hidePadding = false }) {
   const [experiences, setExperiences] = useState(staticExperiences);
 
   useEffect(() => {
+    if (!import.meta.env.DEV) return;
     base44Local.entities.Experience.list('sort_order', 50).then(data => {
       if (data && data.length > 0) {
         setExperiences(data.map(e => ({
@@ -145,7 +146,7 @@ export default function ExperienceSection({ hidePadding = false }) {
         })));
       }
     }).catch(() => {
-      // No local backend (e.g. GitHub Pages) - keep the static list
+      // Local backend not running - keep the static list
     });
   }, []);
 

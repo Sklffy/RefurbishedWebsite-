@@ -2,13 +2,11 @@ import React, { useEffect, useState } from 'react';
 
 const glitchChars = 'X$#@!%&?01<>';
 
-export default function GlitchText({ text, className = '' }) {
+export default function GlitchText({ text, className = '', style }) {
   const [display, setDisplay] = useState(text);
-  const [glitching, setGlitching] = useState(false);
 
   useEffect(() => {
     const triggerGlitch = () => {
-      setGlitching(true);
       let iterations = 0;
       const interval = setInterval(() => {
         setDisplay(
@@ -20,7 +18,6 @@ export default function GlitchText({ text, className = '' }) {
         if (iterations > text.length) {
           clearInterval(interval);
           setDisplay(text);
-          setGlitching(false);
         }
       }, 40);
     };
@@ -30,5 +27,5 @@ export default function GlitchText({ text, className = '' }) {
     return () => { clearTimeout(initial); clearInterval(loop); };
   }, [text]);
 
-  return <span className={className}>{display}</span>;
+  return <span className={className} style={style}>{display}</span>;
 }

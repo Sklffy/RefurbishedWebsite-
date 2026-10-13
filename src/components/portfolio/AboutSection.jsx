@@ -5,10 +5,10 @@ import SectionHeading from './SectionHeading';
 
 const highlights = [
   { text: "Computer Science – Cybersecurity Major", icon: Cpu },
+  { text: "Cloud runtime threat detection on AWS GuardDuty", icon: Lock },
   { text: "Building defense labs & cyber ranges", icon: Lock },
   { text: "Blue & Red team competition experience", icon: Network },
   { text: "Securing systems & infrastructure automation", icon: Lock },
-  { text: "Creating immersive technical experiences", icon: Cpu },
 ];
 
 const stats = [
@@ -24,7 +24,7 @@ export default function AboutSection() {
         <SectionHeading
           badge="About Me"
           title="Who I Am"
-          description="Cybersecurity-focused CS major with expertise in building defense labs, configuring secure infrastructure, and leading hands-on cyber exercises."
+          description="Cybersecurity-focused CS senior and incoming AWS Security Engineer with hands-on experience in detection engineering, system hardening, and cloud infrastructure."
         />
 
         <div className="grid md:grid-cols-2 gap-12 items-center">
@@ -97,8 +97,14 @@ export default function AboutSection() {
                   team defense and red team tactics.
                 </p>
                 <p className="mt-3">
-                  I actively participate in competitions like the NCAE-C Cyber Games where
-                  my team placed <span className="text-primary font-semibold">2nd regionally</span>.
+                  In summer 2026 I interned on <span className="text-primary font-semibold">AWS GuardDuty</span>,
+                  building runtime and CloudTrail threat detections, and I return full-time as a
+                  Security Engineer in July 2027.
+                </p>
+                <p className="mt-3">
+                  I compete in the NCAE Cyber Games, where my teams placed
+                  <span className="text-primary font-semibold"> 2nd regionally</span> in 2025 and
+                  <span className="text-primary font-semibold"> 4th overall</span> in 2026.
                 </p>
               </div>
             </div>

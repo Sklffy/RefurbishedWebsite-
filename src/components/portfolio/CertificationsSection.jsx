@@ -1,13 +1,13 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Award, ExternalLink } from 'lucide-react';
+import { ExternalLink } from 'lucide-react';
 import SectionHeading from './SectionHeading';
 
 const certifications = [
   {
     title: 'CompTIA Security+',
     issuer: 'CompTIA',
-    date: '2025',
+    date: 'Jan 2026',
     badge: 'https://media.base44.com/images/public/69b99a1da1ddf45e7cfb0a87/cba27a626_images.png',
     credlyUrl: 'https://www.credly.com/badges/37966575-74ce-4c86-abc5-a63757cdcd73/public_url',
     description: 'Industry-standard certification validating core security skills and knowledge.',
@@ -27,6 +27,22 @@ const certifications = [
     badge: 'https://images.credly.com/images/7cf036b0-c609-4378-a7be-9969e1dea7ab/blob',
     credlyUrl: 'https://www.credly.com/badges/11e0f3d0-9c4a-492b-99b1-385c4bbd8030/public_url',
     description: 'Training badge covering foundational AWS concepts: compute, storage, networking, databases, security, architecture, and pricing.',
+  },
+  {
+    title: 'Introduction to Cybersecurity',
+    issuer: 'Cisco',
+    date: null,
+    badge: 'https://images.credly.com/images/af8c6b4e-fc31-47c4-8dcb-eb7a2065dc5b/I2CS__1_.png',
+    credlyUrl: 'https://www.credly.com/badges/b1b5cf33-5744-40ac-aaf3-d744f5c76747/public_url',
+    description: 'Introductory course covering cyber threats, network vulnerabilities, and how organizations defend against attacks.',
+  },
+  {
+    title: 'NCAE Cyber Games 2025 Competitor',
+    issuer: 'NCAE Cyber Games',
+    date: 'Mar 2025',
+    badge: 'https://api.badgr.io/public/assertions/ELYCh9a-TY6w_afwex_Zqw/image',
+    credlyUrl: 'https://badgr.com/public/assertions/ELYCh9a-TY6w_afwex_Zqw',
+    description: 'Competed in the 2025 Northeast 2 regional with a 10-person Liberty University team.',
   },
 ];
 
@@ -73,7 +89,7 @@ export default function CertificationsSection({ hidePadding = false }) {
                   <h3 className="font-mono font-bold text-base text-foreground group-hover:text-primary transition-colors">{cert.title}</h3>
                   <p className="font-mono text-xs text-primary/60 mt-0.5">by {cert.issuer}</p>
                   <p className="text-sm text-muted-foreground mt-2">{cert.description}</p>
-                  <span className="font-mono text-[11px] text-primary/70 tracking-widest mt-2 inline-block">[{cert.date}]</span>
+                  {cert.date && <span className="font-mono text-[11px] text-primary/70 tracking-widest mt-2 inline-block">[{cert.date}]</span>}
                 </div>
 
                 {/* External link icon */}

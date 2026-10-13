@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Send, Loader2, Mail, Linkedin, Github, Terminal, Shield, Radio } from 'lucide-react';
+import { Loader2, Mail, Linkedin, Github, Terminal, Shield, Radio } from 'lucide-react';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import emailjs from '@emailjs/browser';
@@ -13,8 +13,8 @@ const EMAILJS_TEMPLATE_ID = 'template_mlpi23p';
 const EMAILJS_PUBLIC_KEY = 'Y_GBT5OcSCrQHS7jT';
 
 const socials = [
-  { icon: Mail, label: 'jdgeisler@liberty.edu', cmd: 'mailto:', href: 'mailto:jdgeisler@liberty.edu' },
-  { icon: Linkedin, label: '/in/jonathan-geisler', cmd: 'open:', href: 'https://www.linkedin.com/in/jonathan-geisler/' },
+  { icon: Mail, label: 'jdgeisler@gmail.com', cmd: 'mailto:', href: 'mailto:jdgeisler@gmail.com' },
+  { icon: Linkedin, label: '/in/jdgeisler', cmd: 'open:', href: 'https://www.linkedin.com/in/jdgeisler/' },
   { icon: Github, label: 'github/Sklffy', cmd: 'clone:', href: 'https://github.com/Sklffy' },
 ];
 

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Preloader from '../components/portfolio/Preloader';
 import Navbar from '../components/portfolio/Navbar';
 import HeroSection from '../components/portfolio/HeroSection';
@@ -9,13 +9,19 @@ import SkillsSection from '../components/portfolio/SkillsSection';
 import CertificationsSection from '../components/portfolio/CertificationsSection';
 import ContactSection from '../components/portfolio/ContactSection';
 import Footer from '../components/portfolio/Footer';
-import MatrixRain from '../components/portfolio/MatrixRain';
 import SectionWrapper from '../components/portfolio/SectionWrapper';
 import CyberBackground from '../components/portfolio/CyberBackground';
 import CyberCursor from '../components/portfolio/CyberCursor';
 
-export default function Home() {
+export default function Home({ scrollTo }) {
   const [loaded, setLoaded] = useState(false);
+
+  // Jump to the linked section once the preloader is gone
+  useEffect(() => {
+    if (!loaded || !scrollTo) return;
+    const timer = setTimeout(() => document.getElementById(scrollTo)?.scrollIntoView({ behavior: 'smooth' }), 100);
+    return () => clearTimeout(timer);
+  }, [loaded, scrollTo]);
 
   return (
     <div className="relative min-h-screen bg-background font-inter">

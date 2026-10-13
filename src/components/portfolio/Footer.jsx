@@ -3,8 +3,8 @@ import { ArrowUp, Github, Linkedin, Mail } from 'lucide-react';
 
 const links = [
   { icon: Github, href: 'https://github.com/Sklffy', label: 'GitHub' },
-  { icon: Linkedin, href: 'https://www.linkedin.com/in/jonathan-geisler/', label: 'LinkedIn' },
-  { icon: Mail, href: 'mailto:jdgeisler@liberty.edu', label: 'Email' },
+  { icon: Linkedin, href: 'https://www.linkedin.com/in/jdgeisler/', label: 'LinkedIn' },
+  { icon: Mail, href: 'mailto:jdgeisler@gmail.com', label: 'Email' },
 ];
 
 export default function Footer() {

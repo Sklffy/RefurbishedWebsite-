@@ -1,16 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { ArrowDown, FileText, Mail, Terminal, Wifi, Shield } from 'lucide-react';
-import { Button } from '@/components/ui/button';
 import MatrixRain from './MatrixRain';
 import GlitchText from './GlitchText';
 import { useNavigate } from 'react-router-dom';
 
 const phrases = [
-  "Cybersecurity Student",
+  "Incoming Security Engineer @ AWS",
+  "Detection Engineer",
   "Blue Team Defender",
   "CTF Competitor",
-  "Ethical Hacker in Training",
 ];
 
 export default function HeroSection() {
@@ -87,11 +86,15 @@ export default function HeroSection() {
         >
           <div className="inline-flex items-center gap-2 px-4 py-2 border border-primary/40 rounded bg-primary/5 mb-8 font-mono text-xs text-primary tracking-widest shadow-lg shadow-primary/10">
             <Terminal className="w-3 h-3" />
-            <button
-              onClick={() => navigate('/admin-login')}
-              className="hover:text-primary/60 transition-colors cursor-pointer"
-              title="Admin access"
-            >root</button>
+            {import.meta.env.DEV ? (
+              <button
+                onClick={() => navigate('/admin-login')}
+                className="hover:text-primary/60 transition-colors cursor-pointer"
+                title="Admin access"
+              >root</button>
+            ) : (
+              <span>root</span>
+            )}
             <span>@portfolio:~$</span>
             <span className="text-foreground/60 animate-pulse">_</span>
           </div>
@@ -135,8 +138,8 @@ export default function HeroSection() {
           className="mt-8 text-muted-foreground max-w-lg leading-relaxed text-base font-mono"
         >
           <span className="text-primary/60">// </span>
-          Computer Science major specializing in Cybersecurity at Liberty University.
-          Passionate about defending digital infrastructure and building secure systems.
+          Computer Science (Cybersecurity) senior at Liberty University and incoming
+          Security Engineer on AWS GuardDuty, building threat detections for cloud workloads.
         </motion.p>
 
         {/* Status indicators */}
@@ -183,7 +186,7 @@ export default function HeroSection() {
 
           {/* Resume button */}
           <a
-            href="https://media.base44.com/files/public/69b99a1da1ddf45e7cfb0a87/cf2631b56_JonathanGeislerResume2026Feb.pdf"
+            href="/resume.pdf"
             target="_blank"
             rel="noopener noreferrer"
             className="relative group font-mono font-bold text-sm tracking-widest uppercase px-8 py-3 text-primary overflow-hidden border border-primary/50"

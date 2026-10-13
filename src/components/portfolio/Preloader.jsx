@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Shield } from 'lucide-react'; // kept for fallback
+// kept for fallback
 
 const bootLines = [
   { text: 'Initializing secure connection...', delay: 0 },

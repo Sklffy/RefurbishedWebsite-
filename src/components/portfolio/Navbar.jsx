@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Menu, X, Terminal, Shield, Wifi } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
@@ -16,20 +16,11 @@ export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [hoveredLink, setHoveredLink] = useState(null);
   const [activeLink, setActiveLink] = useState('Home');
-  const [scanline, setScanline] = useState(0);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 50);
     window.addEventListener('scroll', onScroll);
     return () => window.removeEventListener('scroll', onScroll);
-  }, []);
-
-  // Scanline animation
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setScanline(s => (s + 1) % 100);
-    }, 30);
-    return () => clearInterval(interval);
   }, []);
 
   const handleClick = (href, label) => {

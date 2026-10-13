@@ -2,20 +2,33 @@ import React, { useEffect, useRef, useState } from 'react';
 import { motion } from 'framer-motion';
 import SectionHeading from './SectionHeading';
 
+const DEVICON = 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons';
+
 const skills = [
-  { name: 'Linux', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linux/linux-original.svg' },
-  { name: 'Python', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg' },
-  { name: 'C++', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cplusplus/cplusplus-original.svg' },
-  { name: 'Java', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg' },
-  { name: 'PowerShell', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/powershell/powershell-original.svg' },
-  { name: 'JavaScript', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg' },
-  { name: 'React', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg' },
-  { name: 'Node.js', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original-wordmark.svg' },
-  { name: 'Docker', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg' },
-  { name: 'Git', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg' },
-  { name: 'Bash', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bash/bash-original.svg' },
-  { name: 'HTML5', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg' },
-  { name: 'CSS3', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg' },
+  { name: 'AWS', icon: `${DEVICON}/amazonwebservices/amazonwebservices-original-wordmark.svg` },
+  { name: 'Linux', icon: `${DEVICON}/linux/linux-original.svg` },
+  { name: 'Python', icon: `${DEVICON}/python/python-original.svg` },
+  { name: 'Kali Linux', icon: `${DEVICON}/kalilinux/kalilinux-original.svg` },
+  { name: 'Rocky Linux', icon: `${DEVICON}/rockylinux/rockylinux-original.svg` },
+  { name: 'SQL', icon: `${DEVICON}/mysql/mysql-original.svg`, invert: true },
+  { name: 'C', icon: `${DEVICON}/c/c-original.svg` },
+  { name: 'C++', icon: `${DEVICON}/cplusplus/cplusplus-original.svg` },
+  { name: 'C#', icon: `${DEVICON}/csharp/csharp-original.svg` },
+  { name: 'PowerShell', icon: `${DEVICON}/powershell/powershell-original.svg` },
+  { name: 'Bash', icon: `${DEVICON}/bash/bash-original.svg`, invert: true },
+  { name: 'Docker', icon: `${DEVICON}/docker/docker-original.svg` },
+  { name: 'Proxmox', icon: `${DEVICON}/proxmox/proxmox-original.svg`, invert: true },
+  { name: 'Azure', icon: `${DEVICON}/azure/azure-original.svg` },
+  { name: 'NGINX', icon: `${DEVICON}/nginx/nginx-original.svg` },
+  { name: 'Git', icon: `${DEVICON}/git/git-original.svg` },
+];
+
+// Readable breakdown shown under the canvas - covers tools that have no icon
+const skillGroups = [
+  { label: 'Cloud & Detection', items: ['AWS (EC2, ECS, EKS)', 'GuardDuty', 'CloudTrail', 'Runtime threat detection', 'Microsoft Azure'] },
+  { label: 'Security Tools', items: ['Wireshark', 'Nmap', 'tcpdump', 'Burp Suite', 'pfSense'] },
+  { label: 'Infrastructure', items: ['Proxmox', 'VMware vSphere', 'Docker', 'Apache', 'NGINX', 'Windows Server 2019', 'Linux (Debian, CentOS, Rocky, RHEL, Arch)'] },
+  { label: 'Languages', items: ['Python', 'C', 'C++', 'C#', 'SQL', 'Bash', 'PowerShell', 'x86/ARM Assembly'] },
 ];
 
 // Hex shape path helper
@@ -36,7 +49,6 @@ function getJGPositions(count) {
   const centerX = 0.5;
   const centerY = 0.4;
   const radius = 0.25;
-  const spacing = (2 * Math.PI) / Math.ceil(Math.sqrt(count));
   
   let idx = 0;
   for (let layer = 0; layer < Math.sqrt(count); layer++) {
@@ -107,7 +119,8 @@ export default function SkillsSection() {
       canvas.height = container.offsetHeight;
     }
     resize();
-    window.addEventListener('resize', () => { resize(); init(); });
+    const onResize = () => { resize(); init(); };
+    window.addEventListener('resize', onResize);
 
 
     function init() {
@@ -207,6 +220,8 @@ export default function SkillsSection() {
         // Glitch offset
         const gx = glitching ? (Math.random() - 0.5) * 4 : 0;
         const gy2 = glitching ? (Math.random() - 0.5) * 3 : 0;
+        // Dark icons get inverted (hue kept) so they read on the dark background
+        if (skills[ball.imgIdx].invert) ctx.filter = 'invert(1) hue-rotate(180deg)';
         ctx.drawImage(img, x - s / 2 + gx, y - s / 2 + gy2, s, s);
         ctx.restore();
       }
@@ -239,7 +254,7 @@ export default function SkillsSection() {
       ctx.restore();
     }
 
-    function drawBackground(t) {
+    function drawBackground() {
       // Subtle grid
       ctx.save();
       ctx.strokeStyle = 'rgba(0,200,255,0.04)';
@@ -258,7 +273,7 @@ export default function SkillsSection() {
       tickRef.current++;
       const t = tickRef.current;
       ctx.clearRect(0, 0, canvas.width, canvas.height);
-      drawBackground(t);
+      drawBackground();
 
       const balls = ballsRef.current;
 
@@ -384,7 +399,7 @@ export default function SkillsSection() {
     return () => {
       cancelAnimationFrame(animFrameRef.current);
       clearTimeout(startTimer);
-      window.removeEventListener('resize', resize);
+      window.removeEventListener('resize', onResize);
       canvas.removeEventListener('mousemove', onMouseMove);
       canvas.removeEventListener('mouseleave', onMouseLeave);
     };
@@ -396,7 +411,7 @@ export default function SkillsSection() {
         <SectionHeading
           badge="My Toolkit"
           title="Technical Expertise"
-          description="Technologies and tools I use to build secure, high-performance applications and infrastructure."
+          description="Tools and technologies I use for detection engineering, system hardening, and cloud infrastructure."
         />
         <motion.div
           ref={containerRef}
@@ -425,6 +440,32 @@ export default function SkillsSection() {
             // HOVER TO INTERACT
           </p>
         </motion.div>
+
+        <div className="mt-8 grid sm:grid-cols-2 gap-4">
+          {skillGroups.map((group, i) => (
+            <motion.div
+              key={group.label}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: '-50px' }}
+              transition={{ duration: 0.4, delay: i * 0.08 }}
+              className="relative bg-card/70 border border-primary/20 hover:border-primary/50 rounded p-4 transition-colors backdrop-blur-sm"
+            >
+              <span className="absolute top-1 left-1 w-2.5 h-2.5 border-t border-l border-primary/50" />
+              <span className="absolute bottom-1 right-1 w-2.5 h-2.5 border-b border-r border-primary/50" />
+              <h3 className="font-mono text-xs text-primary tracking-widest uppercase mb-3">
+                <span className="text-primary/50">$ </span>{group.label}
+              </h3>
+              <div className="flex flex-wrap gap-1.5">
+                {group.items.map(item => (
+                  <span key={item} className="font-mono text-[11px] text-muted-foreground border border-primary/15 bg-primary/5 rounded-sm px-2 py-0.5">
+                    {item}
+                  </span>
+                ))}
+              </div>
+            </motion.div>
+          ))}
+        </div>
       </div>
     </section>
   );

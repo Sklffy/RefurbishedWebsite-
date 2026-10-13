@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { base44Local } from '@/lib/localBackend';
-import { Plus, Trash2, Save, X, Upload, ArrowUp, ArrowDown, LogOut, Terminal } from 'lucide-react';
+import { Plus, Trash2, Save, X, Upload, LogOut, Terminal } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { toast } from 'sonner';
