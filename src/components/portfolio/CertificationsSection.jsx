@@ -13,6 +13,15 @@ const certifications = [
     description: 'Industry-standard certification validating core security skills and knowledge.',
   },
   {
+    title: 'AWS Certified Solutions Architect – Associate',
+    issuer: 'Amazon Web Services',
+    date: null,
+    status: 'In Progress',
+    badge: 'https://images.credly.com/images/0e284c3f-5164-4b21-8660-0d84737941bc/image.png',
+    credlyUrl: null,
+    description: 'Currently preparing for SAA-C03: designing secure, resilient, high-performing, and cost-optimized architectures on AWS.',
+  },
+  {
     title: 'AWS Cloud Quest: Cloud Practitioner',
     issuer: 'Amazon Web Services',
     date: 'Aug 2026',
@@ -28,22 +37,6 @@ const certifications = [
     credlyUrl: 'https://www.credly.com/badges/11e0f3d0-9c4a-492b-99b1-385c4bbd8030/public_url',
     description: 'Training badge covering foundational AWS concepts: compute, storage, networking, databases, security, architecture, and pricing.',
   },
-  {
-    title: 'Introduction to Cybersecurity',
-    issuer: 'Cisco',
-    date: null,
-    badge: 'https://images.credly.com/images/af8c6b4e-fc31-47c4-8dcb-eb7a2065dc5b/I2CS__1_.png',
-    credlyUrl: 'https://www.credly.com/badges/b1b5cf33-5744-40ac-aaf3-d744f5c76747/public_url',
-    description: 'Introductory course covering cyber threats, network vulnerabilities, and how organizations defend against attacks.',
-  },
-  {
-    title: 'NCAE Cyber Games 2025 Competitor',
-    issuer: 'NCAE Cyber Games',
-    date: 'Mar 2025',
-    badge: 'https://api.badgr.io/public/assertions/ELYCh9a-TY6w_afwex_Zqw/image',
-    credlyUrl: 'https://badgr.com/public/assertions/ELYCh9a-TY6w_afwex_Zqw',
-    description: 'Competed in the 2025 Northeast 2 regional with a 10-person Liberty University team.',
-  },
 ];
 
 export default function CertificationsSection({ hidePadding = false }) {
@@ -57,12 +50,15 @@ export default function CertificationsSection({ hidePadding = false }) {
         />
 
         <div className="grid gap-6">
-          {certifications.map((cert, i) => (
-            <motion.a
+          {certifications.map((cert, i) => {
+            const Card = cert.credlyUrl ? motion.a : motion.div;
+            const linkProps = cert.credlyUrl
+              ? { href: cert.credlyUrl, target: '_blank', rel: 'noopener noreferrer' }
+              : {};
+            return (
+            <Card
               key={i}
-              href={cert.credlyUrl}
-              target="_blank"
-              rel="noopener noreferrer"
+              {...linkProps}
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: '-50px' }}
@@ -81,24 +77,32 @@ export default function CertificationsSection({ hidePadding = false }) {
 
                 {/* Badge */}
                 <div className="flex-shrink-0 w-24 h-24 rounded border border-primary/30 overflow-hidden bg-white p-2 group-hover:border-primary/60 transition-colors">
-                  <img src={cert.badge} alt={cert.title} className="w-full h-full object-contain" />
+                  <img src={cert.badge} alt={cert.title} className={`w-full h-full object-contain ${cert.status ? 'opacity-50 grayscale' : ''}`} />
                 </div>
 
                 {/* Content */}
                 <div className="flex-1 min-w-0">
-                  <h3 className="font-mono font-bold text-base text-foreground group-hover:text-primary transition-colors">{cert.title}</h3>
+                  <h3 className="font-mono font-bold text-base text-foreground group-hover:text-primary transition-colors flex items-center gap-2 flex-wrap">
+                    {cert.title}
+                    {cert.status && (
+                      <span className="px-1.5 py-0.5 text-[10px] tracking-widest uppercase border border-orange-400/50 text-orange-400 rounded-sm">
+                        {cert.status}
+                      </span>
+                    )}
+                  </h3>
                   <p className="font-mono text-xs text-primary/60 mt-0.5">by {cert.issuer}</p>
                   <p className="text-sm text-muted-foreground mt-2">{cert.description}</p>
                   {cert.date && <span className="font-mono text-[11px] text-primary/70 tracking-widest mt-2 inline-block">[{cert.date}]</span>}
                 </div>
 
                 {/* External link icon */}
-                <div className="flex-shrink-0 w-10 h-10 rounded border border-primary/20 group-hover:border-primary/50 bg-primary/5 group-hover:bg-primary/10 flex items-center justify-center transition-all">
+                {cert.credlyUrl && <div className="flex-shrink-0 w-10 h-10 rounded border border-primary/20 group-hover:border-primary/50 bg-primary/5 group-hover:bg-primary/10 flex items-center justify-center transition-all">
                   <ExternalLink className="w-4 h-4 text-primary/60 group-hover:text-primary transition-colors" />
-                </div>
+                </div>}
               </div>
-            </motion.a>
-          ))}
+            </Card>
+            );
+          })}
         </div>
       </div>
     </section>
